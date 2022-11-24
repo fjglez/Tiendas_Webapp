@@ -1,6 +1,6 @@
 # TiendasAPI_Webapp
 
-PRÁCTICA WEB COMPLETA 
+### PRÁCTICA WEB COMPLETA 
 
  
 
@@ -10,7 +10,7 @@ Hemos realizado una práctica donde se construía una Web API para consumir una 
 
  
 
-Práctica: 
+### Práctica: 
 
 Elegir cualquier tipo de entidad que tenga a su vez una colección de elementos (libertad de elección, pero debe asemejarse a las Ciudades que tienen puntos turísticos). Por ejemplo: 
 
@@ -26,7 +26,7 @@ Cualquier ejemplo del estilo valdría.
 
  
 
-Objetivo: Hacer una Web que cumpla las siguientes características: 
+### Objetivo: Hacer una Web que cumpla las siguientes características: 
 
  
 
@@ -52,7 +52,7 @@ Se debe subir el código a un github público y una vez finalizado todo apuntars
 
  
 
-Ejercicio opcional (adicional para quien quiera): 
+### Ejercicio opcional (adicional para quien quiera): 
 
 - [ ] Una página de registro, para meter los datos, y que se guarden en base de datos: 
 

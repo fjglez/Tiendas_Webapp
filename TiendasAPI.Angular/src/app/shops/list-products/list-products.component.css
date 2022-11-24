@@ -1,0 +1,37 @@
+
+thead {
+  background-color: lightcyan;
+}
+
+table {
+  margin-top: 1%;
+  /*border: 1px solid gray;*/
+}
+
+button{
+    margin-right:1%;
+}
+tr {
+  vertical-align: text-top;
+}
+
+.form-group {
+  margin-bottom:1%;
+}
+
+@media only screen and (min-width: 768px) {
+  label {
+    display: inline-block;
+    width: 15%;
+  }
+
+  .form-group {
+    text-align: center;
+  }
+
+  .form-control {
+    display: inline-block;
+    vertical-align: middle;
+    width: 70%;
+  }
+}

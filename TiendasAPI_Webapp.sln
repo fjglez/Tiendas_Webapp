@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "TiendasAPI.Angular", "TiendasAPI.Angular\TiendasAPI.Angular.esproj", "{88830DAD-4C52-44E4-BC0B-1F353EC23187}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Practica.TiendasAPI", "Practica.TiendasAPI\Practica.TiendasAPI.csproj", "{E72A073D-9874-4E37-8F55-B76678A70F78}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Practica.TiendasAPI.Tests", "Practica.TiendasAPI.Tests\Practica.TiendasAPI.Tests.csproj", "{08159798-52A5-4FDE-85B7-1427C8780490}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88830DAD-4C52-44E4-BC0B-1F353EC23187}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88830DAD-4C52-44E4-BC0B-1F353EC23187}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88830DAD-4C52-44E4-BC0B-1F353EC23187}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{88830DAD-4C52-44E4-BC0B-1F353EC23187}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88830DAD-4C52-44E4-BC0B-1F353EC23187}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88830DAD-4C52-44E4-BC0B-1F353EC23187}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E72A073D-9874-4E37-8F55-B76678A70F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E72A073D-9874-4E37-8F55-B76678A70F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E72A073D-9874-4E37-8F55-B76678A70F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E72A073D-9874-4E37-8F55-B76678A70F78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08159798-52A5-4FDE-85B7-1427C8780490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08159798-52A5-4FDE-85B7-1427C8780490}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08159798-52A5-4FDE-85B7-1427C8780490}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08159798-52A5-4FDE-85B7-1427C8780490}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B278DBA-D30B-4F9A-942A-79B08E1EC823}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,39 @@
+<h2 *ngIf="!productToEditId"> Nuevo producto para {{shop?.name}} </h2>
+<h2 *ngIf="productToEditId"> Editar producto ID {{productToEditId}} en {{shop?.name}}</h2>
+<hr/>
+<div class="card card-body bg-light">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <!-- ngNativeValidate-->
+    <div class="alert alert-danger" [hidden]="!postError">
+      <p>Ha ocurrido un error</p>
+      <p>{{postErrorMessage}}</p>
+    </div>
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <input id="name" name="name" class="form-control" [(ngModel)]="newProduct.name"
+             required maxlength="50" #formName="ngModel" [class.field-error]="form.submitted && formName.invalid" />
+      <div class="alert alert-danger" [hidden]="!form.submitted || formName.valid">
+        <p *ngIf="formName.errors?.['required']">Introduce un nombre</p>
+        <p *ngIf="formName.errors?.['maxlength']">El número de caracteres no puede exceder 50</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Descripción</label>
+      <textarea id="description" name="description" class="form-control" [(ngModel)]="newProduct.description" maxlength="300"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="price">Precio</label>
+      <input id="price" name="price" type="number" class="form-control" [(ngModel)]="newProduct.price"
+             required min="0" #formPrice="ngModel" [class.field-error]="form.submitted && formPrice.invalid"/>
+      <div class="alert alert-danger" [hidden]="!form.submitted || formPrice.valid">
+        <p>Introduce un precio válido</p>
+      </div>
+    </div>
+
+    <div class="form-button">
+      <button type='submit' class="btn btn-success" *ngIf="!productToEditId">Añadir</button>
+      <button type='submit' class="btn btn-success" *ngIf="productToEditId">Guardar</button>
+      <button type='button' class="btn btn-danger" (click)="onCancel()">Cancelar</button>
+    </div>
+  </form>
+</div>

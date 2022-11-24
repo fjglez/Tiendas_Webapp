@@ -1,0 +1,21 @@
+
+thead {
+  background-color: lightgray;
+}
+
+.card-header {
+  background-color: lightcyan;
+}
+
+table {
+  margin-top: 1%;
+}
+img{
+    width:70%;
+}
+
+.card {
+  width: 100%;
+  margin-bottom:5%;
+  text-align: center;
+}

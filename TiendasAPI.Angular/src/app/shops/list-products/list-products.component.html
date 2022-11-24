@@ -1,0 +1,41 @@
+<h1>Productos de {{shop?.name}}</h1>
+<hr />
+
+<div class="form-group">
+  <label for="busqueda">Nombre</label>
+  <input id="busqueda" class="form-control" type="text" [(ngModel)]="listFilter" />
+</div>
+<div class="alert alert-success" *ngIf="successMessage">
+  {{successMessage}}
+</div>
+<div class="alert alert-danger" *ngIf="errorMessage">
+  {{errorMessage}}
+</div>
+<div class="table-responsive ">
+  <table class="table-striped table" *ngIf="products.length">
+    <thead>
+      <tr>
+        <th class="col-3">Nombre</th>
+        <th class="col-6">Descripción</th>
+        <th class="col-1">Precio</th>
+        <th class="col-2">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{product.name}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.price | currency:'EUR':'symbol':'1.2-2'}}</td>
+        <td>
+          <button style="margin-left:1.5%;" class="btn btn-primary" (click)="editProduct(product)"><i class="fa fa-solid fa-pencil"></i></button>
+          <button style="margin-left:1.5%;" class="btn btn-danger" (click)="confirmDeletion(product)"><i class="fa fa-solid fa-trash"></i></button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+<i class="fa fa-solid fa-pen"></i>
+<button style="margin-top:1.5%;" class="btn btn-success" (click)="newProduct()">Nuevo producto</button>
+
+<button style="margin-top:1.5%;" class="btn btn-primary" (click)="returnToShopList()">Volver a la lista de tiendas</button>

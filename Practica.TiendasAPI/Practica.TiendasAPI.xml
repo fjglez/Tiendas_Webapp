@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Practica.TiendasAPI</name>
+    </assembly>
+    <members>
+        <member name="M:Practica.TiendasAPI.Controllers.ProductoController.GetProducts(System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Lista todos los productos de una tienda.
+            </summary>
+            <param name="shopId"></param>
+            <param name="pageSize">Tamaño de página</param>
+            <param name="pageNumber">Número de página</param>
+            <param name="pagination">Incluir o no paginación en el resultado</param>
+            <returns>Lista de productos en JSON</returns>
+        </member>
+        <member name="M:Practica.TiendasAPI.Controllers.ProductoController.GetProductById(System.Int32,System.Int32)">
+            <summary>
+            Obtiene un producto de una tienda.
+            </summary>
+            <param name="shopId"></param>
+            <param name="productId"></param>
+            <returns>Información de un producto en JSON</returns>
+        </member>
+        <member name="M:Practica.TiendasAPI.Controllers.ProductoController.CreateProduct(System.Int32,Practica.TiendasAPI.Models.ProductoCreationDto)">
+            <summary>
+            Crea un producto en la tienda específicada.
+            </summary>
+            <param name="shopId"></param>
+            <param name="product">Nuevo producto en formato JSON</param>
+            <returns></returns>
+        </member>
+        <member name="M:Practica.TiendasAPI.Controllers.ProductoController.UpdateProduct(System.Int32,System.Int32,Practica.TiendasAPI.Models.ProductoUpdateDto)">
+            <summary>
+            Modifica un producto en la tienda especificada.
+            </summary>
+            <param name="shopId"></param>
+            <param name="productId"></param>
+            <param name="product">Nuevo producto en formato JSON</param>
+            <returns></returns>
+        </member>
+        <member name="M:Practica.TiendasAPI.Controllers.ProductoController.PatchProduct(System.Int32,System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Practica.TiendasAPI.Models.ProductoUpdateDto})">
+            <summary>
+            Modifica parcialmente un producto en la tienda especificada.
+            </summary>
+            <param name="shopId"></param>
+            <param name="productId"></param>
+            <param name="patch">Cambios a realizar en formato JsonPatchDocument</param>
+            <returns></returns>
+        </member>
+        <member name="M:Practica.TiendasAPI.Controllers.ProductoController.DeleteProduct(System.Int32,System.Int32)">
+            <summary>
+            Elimina un producto.
+            </summary>
+            <param name="shopId"></param>
+            <param name="productId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Practica.TiendasAPI.Controllers.TiendaController.GetShops(System.String,System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Lista todas las tiendas con sus productos.
+            </summary>
+            <param name="filterBy">Filtro por nombre de la tienda</param>
+            <param name="query">Consulta a buscar en el nombre de la tienda</param>
+            <param name="pageSize">Tamaño de página</param>
+            <param name="pageNumber">Número de página</param>
+            <param name="pagination">Incluir o no paginación en el resultado</param>
+            <returns>Lista de tiendas en formato JSON.</returns>
+        </member>
+        <member name="M:Practica.TiendasAPI.Controllers.TiendaController.GetShopById(System.Int32,System.Boolean)">
+            <summary>
+            Obtiene una tienda.
+            </summary>
+            <param name="shopId"></param>
+            <param name="includeProducts">Indica si el resultado debe incluir o no los productos de la tienda.</param>
+            <returns>Datos de la tienda en formato JSON.</returns>
+        </member>
+    </members>
+</doc>

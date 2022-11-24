@@ -1,0 +1,46 @@
+.form-group {
+  margin-bottom: 1%;
+}
+
+.field-error, .ng-invalid:not(form).ng-touched {
+  border: 1px solid red
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.alert {
+  margin-top: 1%;
+  padding: 1%;
+}
+
+.form-button {
+  text-align: center;
+}
+button {
+    margin-right:1%;
+}
+
+@media only screen and (min-width: 768px) {
+  label {
+    display: inline-block;
+    width: 15%;
+  }
+
+  .form-group {
+    text-align: center;
+  }
+
+  .form-control {
+    display: inline-block;
+    vertical-align: middle;
+    width: 70%;
+  }
+
+  .alert {
+    margin-left: 15%;
+    width: 70%;
+  }
+}

@@ -1,0 +1,14 @@
+<h1>Tiendas</h1>
+<hr />
+<div class="row" *ngFor="let i of rows">
+  <div class="col-sm-4" *ngFor="let shop of shops
+      | slice: i*elementsPerRow : i*elementsPerRow+elementsPerRow">
+    
+      <div class="card" [routerLink]="['/shops',shop.id]">
+        <div class="card-header">{{shop.name}}</div>
+        <div class="card-body"><img src="./assets/img/shops/shop-{{shop.id}}.jpg" /></div>
+        <div *ngIf="shop.description" class="card-footer">{{shop.description}}</div>
+      </div>
+
+  </div>
+</div>

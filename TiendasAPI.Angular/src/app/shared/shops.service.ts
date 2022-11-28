@@ -1,7 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap, catchError, throwError} from 'rxjs';
 import { INewProduct } from '../shops/create-product/INewProduct';
+import { AuthenticationService } from './authentication/authentication.service';
 import { IProduct } from './iproduct';
 import { IShop } from './ishop';
 
@@ -11,11 +12,11 @@ import { IShop } from './ishop';
 export class ShopsService {
   baseUrl = "https://localhost:7202/api"
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
   }
 
   getShop(shopId: string): Observable<IShop> {
-    return this.http.get<IShop>(this.baseUrl + "/shops/" + shopId).pipe(
+    return this.http.get<IShop>(this.baseUrl + "/shops/" + shopId +"?includeProducts=false").pipe(
       tap(data => console.log('Shop:', JSON.stringify(data))),
       catchError(this.handleError));
   }
@@ -38,28 +39,32 @@ export class ShopsService {
 
   postProduct(newProduct: INewProduct, shopId: string): Observable<any> {
     console.log("Creando nuevo producto");
-    return this.http.post(this.baseUrl + "/shops/" + shopId + "/products", newProduct).pipe(
+    const headers = new HttpHeaders().set("Authorization", `Bearer ${this.authenticationService.token}`);
+
+    return this.http.post(this.baseUrl + "/shops/" + shopId + "/products", newProduct, { headers: headers }).pipe(
       tap(data => console.log('Producto creado:', JSON.stringify(data))),
       catchError(this.handleError));
   }
 
   putProduct(newProduct: INewProduct, shopId: string, productId: string): Observable<any> {
     console.log("Editando producto");
-    return this.http.put(this.baseUrl + "/shops/" + shopId + "/products/" + productId, newProduct).pipe(
+    const headers = new HttpHeaders().set("Authorization", `Bearer ${this.authenticationService.token}`);
+
+    return this.http.put(this.baseUrl + "/shops/" + shopId + "/products/" + productId, newProduct, { headers: headers }).pipe(
       tap(_ => console.log('Producto modificado con éxito.')),
       catchError(this.handleError));
   }
 
   deleteProduct(shopId: string, productId: number): Observable<any> {
     console.log("Eliminando un producto");
-    return this.http.delete(this.baseUrl + "/shops/" + shopId + "/products/" + productId).pipe(
+    const headers = new HttpHeaders().set("Authorization", `Bearer ${this.authenticationService.token}`);
+
+    return this.http.delete(this.baseUrl + "/shops/" + shopId + "/products/" + productId, { headers: headers }).pipe(
       tap(_ => console.log('Producto eliminado con éxito.')),
       catchError(this.handleError));
   }
   private handleError(err: HttpErrorResponse) {
-    let errorMessage = err.error.message;
-    console.error(errorMessage);
-    return throwError(() => errorMessage)
+    return throwError(() => err.error)
   }
 
 }

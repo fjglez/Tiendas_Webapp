@@ -4,9 +4,8 @@
 <div class="card card-body bg-light">
   <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     <!-- ngNativeValidate-->
-    <div class="alert alert-danger" [hidden]="!postError">
-      <p>Ha ocurrido un error</p>
-      <p>{{postErrorMessage}}</p>
+    <div class="alert alert-danger" [hidden]="!errorMessage">
+      <p>{{errorMessage}}</p>
     </div>
     <div class="form-group">
       <label for="name">Nombre</label>

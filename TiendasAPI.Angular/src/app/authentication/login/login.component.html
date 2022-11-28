@@ -1,0 +1,30 @@
+<h1> Iniciar sesión </h1>
+<hr />
+<div class="card card-body bg-light">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="alert alert-danger" [hidden]="!errorMessage">
+      <p>{{errorMessage}}</p>
+    </div>
+    <div class="form-group">
+      <label for="username">Nombre</label>
+      <input id="username" name="username" class="form-control" [(ngModel)]="loggingUser.username"
+             required #formUsername="ngModel" [class.field-error]="form.submitted && formUsername.invalid" />
+      <div class="alert alert-danger" [hidden]="!form.submitted || formUsername.valid">
+        <p *ngIf="formUsername.errors?.['required']">Introduce un nombre de usuario</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" name="password" class="form-control" [(ngModel)]="loggingUser.password"
+             required #formPassword="ngModel" [class.field-error]="form.submitted && formPassword.invalid" />
+      <div class="alert alert-danger" [hidden]="!form.submitted || formPassword.valid">
+        <p *ngIf="formPassword.errors?.['required']">Introduce la contraseña</p>
+      </div>
+    </div>
+
+    <div class="form-button">
+      <button type='submit' class="btn btn-success">Iniciar sesión</button>
+    </div>
+  </form>
+</div>
+

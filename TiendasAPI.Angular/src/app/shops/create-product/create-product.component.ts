@@ -5,7 +5,6 @@ import { IShop } from '../../shared/ishop';
 import { ShopsService } from '../../shared/shops.service';
 import { MessagesService } from '../../shared/messages.service';
 import { INewProduct } from './INewProduct';
-import { IProduct } from '../../shared/iproduct';
 
 @Component({
   selector: 'app-create-product',
@@ -22,13 +21,16 @@ export class CreateProductComponent implements OnInit {
   }
   newProduct: INewProduct = { ...this.templateNewProduct }
 
+  errorMessage?: string;
+
   shopId?: string | null;
   shop?: IShop;
 
   // Edición
   productToEditId?: string | null;
 
-  constructor(private route: ActivatedRoute, private shopsService: ShopsService, private router: Router, private messages : MessagesService) { }
+  constructor(private route: ActivatedRoute, private router: Router,
+    private shopsService: ShopsService, private messages: MessagesService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => this.shopId = params.get('id'));
@@ -51,21 +53,18 @@ export class CreateProductComponent implements OnInit {
     }
   }
 
-  postError = false;
-  postErrorMessage?: string;
-
   onSubmit(form: NgForm) {
     // Edita el producto
     if (form.valid && this.shopId != null && this.productToEditId != null) {
       this.shopsService.putProduct(this.newProduct, this.shopId, this.productToEditId).subscribe(
-        result => this.onHttpSuccess(result, "Producto editado con éxito"),
+        result => this.onHttpSuccess("Producto editado con éxito"),
         error => this.onHttpError(error)
       )
     }
     // Crea un nuevo producto
     else if (form.valid && this.shopId != null) {
       this.shopsService.postProduct(this.newProduct, this.shopId).subscribe(
-        result => this.onHttpSuccess(result, "Producto creado con éxito"),
+        result => this.onHttpSuccess("Producto creado con éxito"),
         error => this.onHttpError(error)
       )
     }
@@ -74,12 +73,10 @@ export class CreateProductComponent implements OnInit {
 
   onHttpError(errorResponse: any) {
     console.error('error: ', errorResponse);
-    this.postError = true;
-    this.postErrorMessage = errorResponse.message;
+    this.errorMessage = "Ha ocurrido un error";
   }
 
-  onHttpSuccess(result: any, message: string) {
-    console.log('success: ', result);
+  onHttpSuccess(message: string) {
     if (this.shopId != null) { 
       this.messages.successMessage = message;
       this.router.navigate(['/shops/' + this.shopId]);

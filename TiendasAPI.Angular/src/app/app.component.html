@@ -1,10 +1,19 @@
 
 
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark mb-3">
     <h1 class="navbar-brand">Tiendas WebApp</h1>
-    <div>
-      <ul class="navbar-nav">
+    <button class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target=".navbar-collapse"
+          aria-label="Toggle navigation"
+          [attr.aria-expanded]="isExpanded"
+          (click)="toggle()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content" [ngClass]="{ show: isExpanded }">
+      <ul class="nav navbar-nav flex-grow">
         <li class="nav-item">
           <a class="nav-link" routerLink="/">Inicio</a>
         </li>
@@ -14,6 +23,25 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/contact">Contacto</a>
         </li>
+      </ul>
+    </div>
+    <!--[ngClass]="{ show: isExpanded }"-->
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end" [ngClass]="{ show: isExpanded }">
+      <ul class="nav navbar-nav">
+        <li class="nav-item nav-link" *ngIf="authenticationService.isLogged()">
+          Bienvenido {{authenticationService.username}}
+        </li>
+        <li class="nav-item" *ngIf="authenticationService.isLogged(); else userLogIn">
+          <a class="nav-link" routerLink="/logout">Cerrar sesión</a>
+        </li>
+        <ng-template #userLogIn>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">Iniciar sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register">Registrarse</a>
+          </li>
+        </ng-template>
       </ul>
     </div>
   </nav>

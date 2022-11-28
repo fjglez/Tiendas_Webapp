@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Practica.TiendasAPI.Entities;
@@ -83,11 +85,13 @@ namespace Practica.TiendasAPI.Controllers
         /// <param name="shopId"></param>
         /// <param name="product">Nuevo producto en formato JSON</param>
         /// <returns></returns>
+        [HttpPost()]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status406NotAcceptable)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpPost()]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<ProductoDto>> CreateProduct(int shopId, ProductoCreationDto product)
         {
             if (!await _shopRepository.TiendaExistsAsync(shopId))
@@ -117,6 +121,8 @@ namespace Practica.TiendasAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status406NotAcceptable)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult> UpdateProduct(int shopId, int productId, ProductoUpdateDto product)
         {
             if (!await _shopRepository.TiendaExistsAsync(shopId))
@@ -145,6 +151,8 @@ namespace Practica.TiendasAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status406NotAcceptable)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult> PatchProduct(int shopId, int productId, 
             JsonPatchDocument<ProductoUpdateDto> patch)
         {
@@ -179,6 +187,8 @@ namespace Practica.TiendasAPI.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status406NotAcceptable)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult> DeleteProduct(int shopId, int productId)
         {
             if (!await _shopRepository.TiendaExistsAsync(shopId))

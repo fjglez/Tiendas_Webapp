@@ -1,0 +1,51 @@
+<h1> Crear nueva cuenta </h1>
+<hr />
+<div class="card card-body bg-light">
+  <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <div class="alert alert-danger" [hidden]="!errorMessage">
+      <p>{{errorMessage}}</p>
+    </div>
+    <div class="form-group">
+      <label for="username">Nombre</label>
+      <input id="username" name="username" class="form-control" [(ngModel)]="registerUser.username"
+             required #formUsername="ngModel" [class.field-error]="form.submitted && formUsername.invalid" />
+      <div class="alert alert-danger" [hidden]="!form.submitted || formUsername.valid">
+        <p *ngIf="formUsername.errors?.['required']">Introduce un nombre de usuario</p>
+        <p *ngIf="formUsername.errors?.['invalidusername']">El nombre de usuario no puede contener caracteres especiales</p>
+        <p *ngIf="formUsername.errors?.['existingusername']">Este nombre de usuario ya existe</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" class="form-control" [(ngModel)]="registerUser.email"
+             required email #formEmail="ngModel" [class.field-error]="form.submitted && formEmail.invalid" />
+      <div class="alert alert-danger" [hidden]="!form.submitted || formEmail.valid">
+        <p *ngIf="formEmail.errors?.['required']">Introduce un email</p>
+        <p *ngIf="formEmail.errors?.['email']">Introduce un email válido</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" name="password" class="form-control" [(ngModel)]="registerUser.password"
+             required minlength="8" #formPassword="ngModel" [class.field-error]="form.submitted && formPassword.invalid" />
+      <div class="alert alert-danger" [hidden]="!form.submitted || formPassword.valid">
+        <p *ngIf="formPassword.errors?.['required']">Introduce la contraseña</p>
+        <p *ngIf="formPassword.errors?.['minlength']">Inserta una contraseña de al menos ocho caracteres</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Confirmar contraseña</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" [(ngModel)]="registerUser.confirmPassword"
+             required #formConfirmPassword="ngModel" [class.field-error]="form.submitted && formConfirmPassword.invalid" />
+      <div class="alert alert-danger" [hidden]="!form.submitted || formConfirmPassword.valid">
+        <p *ngIf="formConfirmPassword.errors?.['required']">Introduce la contraseña</p>
+        <p *ngIf="formConfirmPassword.errors?.['mustmatch']">Las contraseñas deben coincidir</p>
+      </div>
+    </div>
+
+    <div class="form-button">
+      <button type='submit' class="btn btn-success">Registrarse</button>
+    </div>
+  </form>
+</div>
+

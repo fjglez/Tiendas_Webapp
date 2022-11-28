@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ShopsModule } from './shops/shops.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
   imports: [
     BrowserModule,
     ShopsModule,
+    AuthenticationModule,
     HttpClientModule,
     RouterModule.forRoot([
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthenticationService } from '../../shared/authentication/authentication.service';
 import { IProduct } from '../../shared/iproduct';
 import { IShop } from '../../shared/ishop';
 import { MessagesService } from '../../shared/messages.service';
@@ -13,7 +14,8 @@ import { ShopsService } from '../../shared/shops.service';
 })
 export class ListProductsComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private router: Router, private shopsService: ShopsService, private messages: MessagesService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
+    private shopsService: ShopsService, private messages: MessagesService) { }
 
   shopId?: string | null;
   allProducts: IProduct[] = [];
@@ -76,6 +78,10 @@ export class ListProductsComponent implements OnInit {
 
   // Botón para eliminar producto
   confirmDeletion(product: IProduct) {
+    if (!this.authenticationService.isLogged()) {
+      this.router.navigate(['login']);
+      return;
+    }
     Swal.fire({
       title: 'Confirmar eliminación',
       text: "El producto '" + product.name + "' será eliminado para siempre.",
@@ -86,7 +92,7 @@ export class ListProductsComponent implements OnInit {
     }).then((response: any) => {
       if (response.value && this.shopId != null) {
         this.shopsService.deleteProduct(this.shopId, product.id).subscribe(
-          result => this.onHttpSuccess(result),
+          result => this.onHttpSuccess(),
           error => this.onHttpError(error)
         );
       } else if (response.dismiss === Swal.DismissReason.cancel) {
@@ -100,8 +106,7 @@ export class ListProductsComponent implements OnInit {
     this.successMessage = undefined;
   }
 
-  onHttpSuccess(result: any) {
-    console.log('success: ', result);
+  onHttpSuccess() {
     if (this.shopId != null) {
       this.successMessage = "Producto eliminado con éxito";
       this.errorMessage = undefined;

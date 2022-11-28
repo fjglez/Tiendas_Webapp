@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Practica.TiendasAPI.DbContexts;
 using Practica.TiendasAPI.Services;
 using Serilog;
 using System.Reflection;
+using System.Text;
 
 
 // Añadir logs
@@ -35,8 +38,25 @@ builder.Services.AddSwaggerGen(setupAction =>
 // Configurando la DB
 builder.Services.AddDbContext<TiendaContext>( // Usando SQLite
     dbContextOptions => dbContextOptions.UseSqlite(builder.Configuration["ConnectionStrings:DBConnectionString"]));
-builder.Services.AddDefaultIdentity<IdentityUser>(/* Opciones si fuesen necesarias*/)
+builder.Services.AddDefaultIdentity<IdentityUser>(
+                    options => {
+                        /* Configuración para hacer la contraseña más sencilla */
+                        options.Password.RequireDigit = false;
+                        options.Password.RequireLowercase = false;
+                        options.Password.RequireNonAlphanumeric = false;
+                        options.Password.RequireUppercase = false;
+                        options.Password.RequiredLength = 8;
+                        options.Password.RequiredUniqueChars = 0;
+                    })
                 .AddEntityFrameworkStores<TiendaContext>();
+builder.Services.AddAuthentication()
+    .AddCookie()
+    .AddJwtBearer(cfg => 
+        cfg.TokenValidationParameters = new TokenValidationParameters{
+            ValidIssuer = builder.Configuration["Tokens:Issuer"],
+            ValidAudience = builder.Configuration["Tokens:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Tokens:Key"]))
+        });
 
 builder.Services.AddScoped<ITiendaRepository, TiendaRepository>();
 

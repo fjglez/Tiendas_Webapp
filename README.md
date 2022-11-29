@@ -68,4 +68,4 @@ Mail
 
 - [x] Seguridad en la webApi con el uso de token 
 
-- [ ] Test Unitarios de webAPI (Faltan test de registro)
+- [x] Test Unitarios de webAPI
